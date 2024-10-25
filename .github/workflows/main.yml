@@ -30,6 +30,22 @@ jobs:
         env:
           DEFAULT_BRANCH : main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+  Docker-image:
+    runs-on: ubuntu-latest
+    needs: [Build]
+    permissions:
+      packages: write
+
+
+
+
+
+
+
+
+
+          
           GITHUB_WORKSPACE: .
 
 
