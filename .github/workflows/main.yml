@@ -34,7 +34,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --workdir .
+          args: --workdir ./
   
   Build:
     runs-on: ubuntu-latest
