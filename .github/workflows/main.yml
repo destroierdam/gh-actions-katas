@@ -31,6 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - run: gradle wrapper
+      - run: gradle dependencies -q
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/gradle-jdk11@master
         env:
