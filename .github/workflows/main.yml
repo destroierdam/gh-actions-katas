@@ -23,7 +23,6 @@ jobs:
           args: >
             -Dsonar.organization=destroierdam
             -Dsonar.projectKey=destroierdam_gh-actions-katas
-            # -Dsonar.exclusions=**/*.java
   
   Build:
     runs-on: ubuntu-latest
