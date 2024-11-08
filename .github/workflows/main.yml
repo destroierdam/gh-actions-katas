@@ -18,6 +18,10 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v3.1.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=destroierdam
+            -Dsonar.projectKey=destroierdam_gh-actions-katas
     
   Linting:
     runs-on: ubuntu-latest
