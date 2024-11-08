@@ -27,9 +27,10 @@ jobs:
   
   Snyk:
     runs-on: ubuntu-latest
+    container: gradle:6-jdk11
     steps:
       - uses: actions/checkout@master
-      - run: gradle wrapper
+      - run: ci/build-app.sh
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/gradle-jdk11@master
         env:
