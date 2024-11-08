@@ -7,22 +7,19 @@ env: # Set the secret as an input
   GIT_COMMIT: ${{ github.sha }}
   
 jobs:
-  Build:
+
+  SonarCloud:
     runs-on: ubuntu-latest
     container: gradle:6-jdk11
     steps:
       - name: Clone down repository
-        uses: actions/checkout@v4       
-      - run: ci/build-app.sh
-      - name: Test
-        run: ci/unit-test-app.sh
-      - name: Upload repo
-        uses: actions/upload-artifact@v4
-        with:
-          name: code
-          path: .
+        uses: actions/checkout@v4
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v3.1.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    
   Linting:
-    needs: Build
     runs-on: ubuntu-latest
     container: gradle:6-jdk11
     steps:
@@ -36,6 +33,22 @@ jobs:
         env:
           DEFAULT_BRANCH : main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+  Build:
+    runs-on: ubuntu-latest
+    needs: [Linting, SonarCloud]
+    container: gradle:6-jdk11
+    steps:
+      - name: Clone down repository
+        uses: actions/checkout@v4       
+      - run: ci/build-app.sh
+      - name: Test
+        run: ci/unit-test-app.sh
+      - name: Upload repo
+        uses: actions/upload-artifact@v4
+        with:
+          name: code
+          path: .
   
   Docker-image:
     runs-on: ubuntu-latest
