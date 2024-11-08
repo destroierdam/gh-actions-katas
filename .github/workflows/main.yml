@@ -33,8 +33,6 @@ jobs:
         uses: snyk/actions/gradle-jdk11@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --workdir ./
   
   Build:
     runs-on: ubuntu-latest
