@@ -14,6 +14,7 @@ jobs:
     steps:
       - name: Clone down repository
         uses: actions/checkout@v4
+      - run: ci/build-app.sh
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v3.1.0
         env:
@@ -22,7 +23,7 @@ jobs:
           args: >
             -Dsonar.organization=destroierdam
             -Dsonar.projectKey=destroierdam_gh-actions-katas
-            -Dsonar.exclusions=**/*.java
+            # -Dsonar.exclusions=**/*.java
   
   Build:
     runs-on: ubuntu-latest
