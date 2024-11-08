@@ -34,7 +34,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --file=gh-actions-katas/app/build.gradle
+          args: --file=/app/build.gradle
   
   Build:
     runs-on: ubuntu-latest
